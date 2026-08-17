@@ -1,112 +1,60 @@
-\# Email Code Reader
-
-
+```
+# Email Code Reader
 
 Простой Python-инструмент для автоматического получения кодов подтверждения с почты через IMAP.
 
+## Возможности
 
+- Подключение к любому почтовому сервису через IMAP
+- Поиск кода в теме и теле письма
+- Настройка длины кода (по умолчанию 6 цифр)
+- Настройка периода поиска (по умолчанию 30 минут)
 
-\## Возможности
+## Установка
 
+1. Склонируйте репозиторий:
 
-
-\- Подключение к любому почтовому сервису через IMAP
-
-\- Поиск кода в теме и теле письма
-
-\- Настройка длины кода (по умолчанию 6 цифр)
-
-\- Настройка периода поиска (по умолчанию 30 минут)
-
-
-
-\## Установка
-
-
-
-1\. Склонируйте репозиторий:
-
-```bash
-
-git clone https://github.com/yourusername/email-code-reader.git
-
+git clone https://github.com/keronis7/email-code-reader.git
 cd email-code-reader
 
-
-
-2\. Создайте виртуальное окружение:
+2. Создайте виртуальное окружение:
 
 python -m venv venv
+venv\Scripts\activate
 
-venv\\Scripts\\activate
-
-
-
-3\. Установите зависимости:
+3. Установите зависимости:
 
 pip install -r requirements.txt
 
+4. Создайте файл .env:
 
+EMAIL_USER=your_email@example.com
+EMAIL_PASSWORD=your_password
+EMAIL_IMAP_SERVER=imap.yourserver.com
+TARGET_EMAIL=email_where_code_sent@example.com
 
-4\. Создайте файл .env:
+## Использование
 
-EMAIL\_USER=your\_email@example.com
-
-EMAIL\_PASSWORD=your\_password
-
-EMAIL\_IMAP\_SERVER=imap.yourserver.com
-
-TARGET\_EMAIL=email\_where\_code\_sent@example.com
-
-
-
-\## Использование
-
-
-
-from email\_code\_reader import EmailCodeReader
-
-
+from email_code_reader import EmailCodeReader
 
 reader = EmailCodeReader(
-
-&#x20;   email\_address="your\_email@example.com",
-
-&#x20;   password="your\_password",
-
-&#x20;   imap\_server="imap.yourserver.com"
-
+    email_address="your_email@example.com",
+    password="your_password",
+    imap_server="imap.yourserver.com"
 )
 
-
-
-code = reader.get\_code(
-
-&#x20;   to\_email="target@example.com",
-
-&#x20;   minutes=30,
-
-&#x20;   code\_length=6
-
+code = reader.get_code(
+    to_email="target@example.com",
+    minutes=30,
+    code_length=6
 )
-
-
 
 if code:
-
-&#x20;   print(f"Код: {code}")
-
+    print(f"Код: {code}")
 else:
+    print("Код не найден")
 
-&#x20;   print("Код не найден")
-
-
-
-\## Лицензия
-
-
+## Лицензия
 
 MIT
-
-
-
+```
