@@ -1,4 +1,3 @@
- 
 import imaplib
 import email
 import re
@@ -9,13 +8,26 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+IMAP_SERVERS = {
+    "gmail.com": "imap.gmail.com",
+    "mail.ru": "imap.mail.ru",
+    "yandex.ru": "imap.yandex.ru",
+    "outlook.com": "imap.outlook.com",
+    "hotmail.com": "imap.outlook.com",
+}
+
 
 class EmailCodeReader:
-    def __init__(self, email_address, password, imap_server="imap.gmail.com", imap_port=993):
+    def __init__(self, email_address, password, imap_server=None, imap_port=993):
         self.email_address = email_address
         self.password = password
-        self.imap_server = imap_server
         self.imap_port = imap_port
+
+        if imap_server:
+            self.imap_server = imap_server
+        else:
+            domain = email_address.split("@")[1].lower()
+            self.imap_server = IMAP_SERVERS.get(domain, "imap.gmail.com")
 
     def get_code(self, to_email, minutes=30, code_length=6):
         try:
@@ -82,7 +94,7 @@ if __name__ == "__main__":
     reader = EmailCodeReader(
         email_address=os.getenv("EMAIL_USER"),
         password=os.getenv("EMAIL_PASSWORD"),
-        imap_server=os.getenv("EMAIL_IMAP_SERVER", "imap.gmail.com")
+        imap_server=os.getenv("EMAIL_IMAP_SERVER")
     )
 
     code = reader.get_code(

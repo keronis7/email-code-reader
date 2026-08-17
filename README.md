@@ -1,4 +1,3 @@
-```
 # Email Code Reader
 
 Простой Python-инструмент для автоматического получения кодов подтверждения с почты через IMAP.
@@ -6,6 +5,7 @@
 ## Возможности
 
 - Подключение к любому почтовому сервису через IMAP
+- Автоматическое определение IMAP сервера для Gmail, Mail.ru, Yandex, Outlook
 - Поиск кода в теме и теле письма
 - Настройка длины кода (по умолчанию 6 цифр)
 - Настройка периода поиска (по умолчанию 30 минут)
@@ -33,6 +33,8 @@ EMAIL_PASSWORD=your_password
 EMAIL_IMAP_SERVER=imap.yourserver.com
 TARGET_EMAIL=email_where_code_sent@example.com
 
+EMAIL_IMAP_SERVER можно не указывать для Gmail, Mail.ru, Yandex, Outlook - сервер определится автоматически.
+
 ## Использование
 
 from email_code_reader import EmailCodeReader
@@ -57,4 +59,3 @@ else:
 ## Лицензия
 
 MIT
-```
